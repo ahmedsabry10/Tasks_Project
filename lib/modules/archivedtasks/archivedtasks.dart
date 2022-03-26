@@ -2,6 +2,7 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:tests/components/components.dart';
 import 'package:tests/shared/cubit/cubit.dart';
 import 'package:tests/shared/cubit/states.dart';
@@ -24,7 +25,7 @@ class ArchivedTask extends StatelessWidget {
               separatorBuilder: (context,index)=>Container(
                 width: double.infinity,
                 height: 1.0,
-                color: Colors.grey[300],
+                color: HexColor('#283747'),
               ),
               itemCount: tasks.length,
             ),
@@ -33,10 +34,13 @@ class ArchivedTask extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.menu,
+                    Icons.archive_rounded,
                     size: 100.0,
                     color: Colors.grey,
                   ) ,
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   Text(
                     'No Archived Tasks Yet' ,
                     style: TextStyle(

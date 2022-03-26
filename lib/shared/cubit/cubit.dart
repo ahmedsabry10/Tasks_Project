@@ -8,6 +8,8 @@ import 'package:tests/modules/donetasks/donetasks.dart';
 import 'package:tests/modules/newtasks/newtasks.dart';
 import 'package:tests/shared/cubit/states.dart';
 
+import '../cachehelper.dart';
+
 class AppCubit extends Cubit <AppStates>{
   AppCubit ():super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
@@ -18,7 +20,7 @@ class AppCubit extends Cubit <AppStates>{
     ArchivedTask(),
   ];
   List <String> titles =[
-    'New Tasks',
+    'Add New Tasks',
     'Done Tasks',
     'Archived Tasks',
   ];
@@ -128,5 +130,22 @@ class AppCubit extends Cubit <AppStates>{
     isBottomSheetShown=isShow;
     fabIcon =icon ;
     emit(AppChangeBottomSheetState());
+  }
+
+
+  bool isDark=false;
+  void changeAppMode({bool fromShared})
+  {
+    if(fromShared != null){
+      isDark=fromShared;
+      emit(AppChangeModeStates());
+    }else{
+      isDark = !isDark;
+      CacheHelper.putBoolean(key: 'isDark', value: isDark
+      ).then((value) {
+        emit(AppChangeModeStates());
+      });
+    }
+
   }
 }

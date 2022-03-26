@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tests/shared/cubit/cubit.dart';
 
+void navigateTo (context ,widget)=>Navigator.push(
+  context,
+  MaterialPageRoute(
+      builder: (context)=>widget),);
+
 class Components extends StatelessWidget {
 
   @override
@@ -18,8 +23,7 @@ Widget buildTaskItem (Map model , context) =>  Dismissible(
 
       children: [
         CircleAvatar(
-          backgroundColor: Colors.blue[450],
-          radius: 40.0,
+          radius: 35.0,
           child: Text(
             '${model['time']}',
             style: TextStyle(
@@ -60,7 +64,7 @@ Widget buildTaskItem (Map model , context) =>  Dismissible(
             },
             icon: Icon(
               Icons.check_box ,
-              color: Colors.green,
+              color: Colors.grey,
             )),
         IconButton(
             onPressed:(){
@@ -68,7 +72,7 @@ Widget buildTaskItem (Map model , context) =>  Dismissible(
             },
             icon: Icon(
               Icons.archive ,
-              color: Colors.black45,
+              color: Colors.grey,
             )),
 
 

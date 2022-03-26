@@ -1,9 +1,12 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:tests/shared/cubit/cubit.dart';
 import 'package:tests/shared/cubit/states.dart';
+
+import 'components/components.dart';
 
 class Test extends StatelessWidget {
 
@@ -31,12 +34,11 @@ class Test extends StatelessWidget {
           return Scaffold(
             key: scaffoldKey,
             appBar: AppBar(
-              title: Center(
-                child: Text(
-                  cubit.titles[cubit.currentIndex],
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+              centerTitle: true,
+              title: Text(
+                cubit.titles[cubit.currentIndex],
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -60,7 +62,7 @@ class Test extends StatelessWidget {
                   scaffoldKey.currentState.showBottomSheet((context) =>
                       Container(
                         padding: EdgeInsets.all(20.0),
-                        color: Colors.grey[200],
+                        color:HexColor('#2C3E50'),
                         child: Form(
                           key: formKey,
                           child: Column(
@@ -69,10 +71,15 @@ class Test extends StatelessWidget {
                               TextFormField(
                                 controller: titleController,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
+                                  filled: true,
+                                  fillColor: Colors.grey[300],
                                   labelText: 'Task Title',
-                                  prefix: Icon(
+                                  labelStyle: TextStyle(
+                                    color: HexColor('#424949')
+                                  ),
+                                  prefixIcon: Icon(
                                     Icons.title,
+                                      color: HexColor('#424949')
                                   ),
                                 ),
                                 validator: (String value) {
@@ -88,10 +95,15 @@ class Test extends StatelessWidget {
                               TextFormField(
                                 controller: timeController,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
+                                  filled: true,
+                                  fillColor: Colors.grey[300],
                                   labelText: 'Task time',
-                                  prefix: Icon(
+                                  labelStyle: TextStyle(
+                                      color: HexColor('#424949')
+                                  ),
+                                  prefixIcon: Icon(
                                     Icons.watch_later_outlined,
+                                      color: HexColor('#424949')
                                   ),
                                 ),
                                 validator: (String value) {
@@ -123,10 +135,15 @@ class Test extends StatelessWidget {
                                   return null;
                                 },
                                 decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.grey[300],
                                   labelText: 'Task Date',
-                                  border: OutlineInputBorder(),
-                                  prefix: Icon(
+                                  labelStyle: TextStyle(
+                                      color: HexColor('#424949')
+                                  ),
+                                  prefixIcon: Icon(
                                     Icons.calendar_today,
+                                      color: HexColor('#424949')
                                   ),
                                 ),
                                 onTap: () {
@@ -145,7 +162,7 @@ class Test extends StatelessWidget {
                           ),
                         ),
                       ),
-                    elevation: 20.0,
+                    elevation: 10.0,
                   ).closed.then((value){
                     cubit.changeBottomSheetState(
                       isShow: false,
@@ -168,19 +185,19 @@ class Test extends StatelessWidget {
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.menu,
+                    Icons.menu_rounded,
                   ),
                   label: 'tasks',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.check_circle_outline,
+                    Icons.check_circle_rounded,
                   ),
                   label: 'Done',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.archive,
+                    Icons.archive_rounded,
                   ),
                   label: 'Archived',
                 ),
