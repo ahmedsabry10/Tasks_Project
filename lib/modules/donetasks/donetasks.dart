@@ -24,8 +24,8 @@ class DoneTask extends StatelessWidget {
               itemBuilder: (context,index)=>buildTaskItem(tasks[index] , context),
               separatorBuilder: (context,index)=>Container(
                 width: double.infinity,
-                height: 1.0,
-                color: HexColor('#283747'),
+                height: 0.5,
+                color:Colors.grey[300]
               ),
               itemCount: tasks.length,
             ),

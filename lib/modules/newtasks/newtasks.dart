@@ -26,8 +26,8 @@ class NewTask extends StatelessWidget {
 
           separatorBuilder: (context,index)=>Container(
             width: double.infinity,
-            height: 1.0,
-            color: HexColor('#283747'),
+            height: .5,
+            color: Colors.grey[300],
 
           ),
           itemCount: tasks.length,

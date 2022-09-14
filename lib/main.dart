@@ -16,53 +16,39 @@ class MyApp extends StatelessWidget {
     Bloc.observer = MyBlocObserver();
     return MaterialApp(
       theme: ThemeData(
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-
-        ),
-        buttonTheme: ButtonThemeData(),
-        drawerTheme: DrawerThemeData(
-          backgroundColor: HexColor('#1C2833'),
-        ),
-        scaffoldBackgroundColor: HexColor('#1C2833'),
-        primarySwatch: Colors.deepOrange,
-        backgroundColor: HexColor('#1C2833'),
-        appBarTheme: AppBarTheme(
-          backgroundColor:  HexColor('#1C2833'),
-          titleSpacing: 20.0,
-          backwardsCompatibility: false,
-          elevation: 0.0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.light,
-            statusBarColor: HexColor('#1C2833 '),
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor:Colors.white,
+          appBarTheme: AppBarTheme(
+              titleSpacing: 20.0,
+              backgroundColor: Colors.white,
+              elevation: 0.0,
+              backwardsCompatibility: false,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarIconBrightness: Brightness.dark,
+                statusBarColor: Colors.white,
+              ),
+              titleTextStyle: TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+              iconTheme: IconThemeData(
+                color: Colors.black,
+              )
           ),
-          titleTextStyle: const TextStyle(
-            color: Colors.white,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.blue,
+            unselectedItemColor: Colors.grey,
+            backgroundColor: Colors.white,
           ),
-          iconTheme: const IconThemeData(
-            color: Colors.white,
-          ),
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.deepOrange,
-          unselectedItemColor: Colors.grey,
-          backgroundColor: HexColor('#1C2833 '),
-        ),
-        textTheme: const TextTheme(
-          bodyText1: TextStyle(
-            color: Colors.white,
-            fontSize: 18.0,
-            fontWeight: FontWeight.w600,
-          ),
-          bodyText2: TextStyle(
-            color: Colors.white,
-            fontSize: 16.0,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-
+          textTheme: TextTheme(
+              bodyText1: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              )
+          )
       ),
       home:Test(),
       debugShowCheckedModeBanner: false,

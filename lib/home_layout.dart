@@ -62,7 +62,7 @@ class Test extends StatelessWidget {
                   scaffoldKey.currentState.showBottomSheet((context) =>
                       Container(
                         padding: EdgeInsets.all(20.0),
-                        color:HexColor('#2C3E50'),
+                        color:Colors.grey[300],
                         child: Form(
                           key: formKey,
                           child: Column(
