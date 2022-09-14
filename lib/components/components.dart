@@ -142,3 +142,15 @@ Widget buildTaskItem (Map model , context) =>  Dismissible(
   AppCubit.get(context).deleteDatabase( id:model['id'],);
   },
 );
+
+
+
+
+
+void navigateAndFinish(context ,widget)=>Navigator.pushAndRemoveUntil(
+  context,
+  MaterialPageRoute(
+      builder: (context)=>widget
+  ),
+      (Route <dynamic> route)=>false,
+);

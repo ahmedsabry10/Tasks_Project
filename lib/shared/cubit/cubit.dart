@@ -17,7 +17,6 @@ class AppCubit extends Cubit <AppStates>{
   List <Widget> screen=[
     NewTask(),
     DoneTask(),
-    ArchivedTask(),
   ];
   List <String> titles =[
     'Add New Tasks',
