@@ -32,7 +32,8 @@ class ArchivedTask extends StatelessWidget {
             body: ConditionalBuilder(
               condition: tasks.length > 0,
               builder:(context)=> ListView.separated(
-                itemBuilder: (context,index)=>buildTaskItem(tasks[index] , context),
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context,index)=>buildArchivedTaskItem(tasks[index] , context),
                 separatorBuilder: (context,index)=>Container(
                   width: double.infinity,
                   height: .5,

@@ -21,14 +21,12 @@ class NewTask extends StatelessWidget {
       return ConditionalBuilder(
         condition: tasks.length > 0,
         builder:(context)=> ListView.separated(
+          physics: BouncingScrollPhysics(),
 
-          itemBuilder: (context,index)=>buildTaskItem(tasks[index] , context),
+          itemBuilder: (context,index)=>buildNewTaskItem(tasks[index] , context),
 
-          separatorBuilder: (context,index)=>Container(
-            width: double.infinity,
-            height: .5,
-            color: Colors.grey[300],
-
+          separatorBuilder: (context,index)=>SizedBox(
+            height: 1,
           ),
           itemCount: tasks.length,
         ),

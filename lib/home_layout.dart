@@ -11,7 +11,6 @@ import 'modules/archivedtasks/archivedtasks.dart';
 
 class HomeLayout extends StatelessWidget {
 
-
   var titleController = TextEditingController();
   var timeController = TextEditingController();
   var dateController = TextEditingController();
@@ -41,7 +40,7 @@ class HomeLayout extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.archive ,
-                    color: Colors.grey,
+                    color: Colors.blue,
                   )),
 
             ],
