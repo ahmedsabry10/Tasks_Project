@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:tests/modules/archivedtasks/archivedtasks.dart';
 import 'package:tests/modules/donetasks/donetasks.dart';
 import 'package:tests/modules/newtasks/newtasks.dart';
 import 'package:tests/shared/cubit/states.dart';
@@ -18,11 +17,7 @@ class AppCubit extends Cubit <AppStates>{
     NewTask(),
     DoneTask(),
   ];
-  List <String> titles =[
-    'Add New Tasks',
-    'Done Tasks',
-    'Archived Tasks',
-  ];
+
   void changeIndex(int index){
     currentIndex =index;
     emit(AppChangeBottomNavBarState());
@@ -44,7 +39,7 @@ class AppCubit extends Cubit <AppStates>{
         version: 1 ,
         onCreate: (database , version){
           print('database created');
-          database.execute('CREATE TABLE tasks (id INTEGER PRIMARY KEY ,title TEXT ,time TEXT ,date TEXT ,status TEXT)').then((value) {
+          database.execute('CREATE TABLE tasks (id INTEGER PRIMARY KEY ,title TEXT ,time TEXT ,date TEXT ,details TEXT,status TEXT)').then((value) {
             print ('created table');
           }).catchError((error){
             print ('error when created table ${error.toString()}');
@@ -65,11 +60,11 @@ class AppCubit extends Cubit <AppStates>{
     @required String title ,
     @required String time ,
     @required String date ,
-
+    @required String details ,
   }) async {
   await database.transaction((txn) {
       txn
-          .rawInsert('INSERT INTO tasks (title ,time ,date ,status) VALUES ("$title" ,"$time" ,"$date" ,"new")',
+          .rawInsert('INSERT INTO tasks (title ,time ,date,details ,status) VALUES ("$title" ,"$time" ,"$date","$details" ,"new")',
       ).then((value) {
         print('$value inserted successfully');
         emit(AppInsertDatabaseState());

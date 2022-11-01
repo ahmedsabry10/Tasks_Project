@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
-import 'package:tests/components/components.dart';
-import 'package:tests/home_layout.dart';
 import 'package:tests/shared/cubit/cubit.dart';
 import 'package:tests/shared/cubit/states.dart';
 
@@ -13,6 +10,7 @@ class AddNewTasks extends StatelessWidget {
   var titleController = TextEditingController();
   var timeController = TextEditingController();
   var dateController = TextEditingController();
+  var detailsController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -52,11 +50,16 @@ class AddNewTasks extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: titleController,
+                        style: TextStyle(
+                        color:AppCubit.get(context).isDark? Colors.white:Colors.black,
+                      ),
+
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
                           labelText: 'Task Title',
                           labelStyle: const TextStyle(
-                              fontStyle: FontStyle.italic
+                              fontStyle: FontStyle.italic,
+                            color: Colors.blue
                           ),
                           prefixIcon: Icon(
                             Icons.title,
@@ -78,16 +81,54 @@ class AddNewTasks extends StatelessWidget {
                         },
 
                       ),
+
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      TextFormField(
+                        style: TextStyle(
+                            color:AppCubit.get(context).isDark? Colors.white:Colors.black,
+                        ),
+                        controller: detailsController,
+                        maxLines: 5,
+                        decoration: InputDecoration(
+
+                          contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
+                          labelText: 'details',
+                          labelStyle: const TextStyle(
+                              fontStyle: FontStyle.italic,
+                            color:Colors.blue,
+                          ),
+                          prefixIcon: Icon(
+                            Icons.details,
+                            color: Colors.blue,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                            borderSide:  BorderSide(
+                              color: Colors.blue,
+                              width: .3,
+                            ),
+                          ),
+                        ),
+
+
+                      ),
+
                       SizedBox(
                         height: 15.0,
                       ),
                       TextFormField(
                         controller: timeController,
+                        style: TextStyle(
+                          color:AppCubit.get(context).isDark? Colors.white:Colors.black,
+                        ),
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
                           labelText: 'Task Time',
                           labelStyle: const TextStyle(
-                              fontStyle: FontStyle.italic
+                              fontStyle: FontStyle.italic,
+                            color: Colors.blue
                           ),
                           prefixIcon: Icon(
                             Icons.watch_later_outlined,
@@ -123,6 +164,9 @@ class AddNewTasks extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: dateController,
+                        style: TextStyle(
+                          color:AppCubit.get(context).isDark? Colors.white:Colors.black,
+                        ),
                         validator: (String value) {
                           if (value.isEmpty) {
                             return 'Should enter date';
@@ -133,7 +177,8 @@ class AddNewTasks extends StatelessWidget {
                           contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
                           labelText: 'Task Date',
                           labelStyle: const TextStyle(
-                              fontStyle: FontStyle.italic
+                              fontStyle: FontStyle.italic,
+                            color: Colors.blue
                           ),
                           prefixIcon: Icon(
                             Icons.calendar_today,
@@ -170,6 +215,7 @@ class AddNewTasks extends StatelessWidget {
                               if (formKey.currentState.validate()) {
                                 AppCubit.get(context).insertToDatabase(
                                   title: titleController.text,
+                                  details: detailsController.text,
                                   time: timeController.text,
                                   date: dateController.text,
                                 );

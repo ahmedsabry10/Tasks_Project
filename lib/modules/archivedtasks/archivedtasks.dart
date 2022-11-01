@@ -46,7 +46,7 @@ class ArchivedTask extends StatelessWidget {
                     Icon(
                       Icons.archive_rounded,
                       size: 100.0,
-                      color: Colors.grey,
+                      color: AppCubit.get(context).isDark ?Colors.white :Colors.black,
                     ) ,
                     SizedBox(
                       height: 20.0,
@@ -54,7 +54,7 @@ class ArchivedTask extends StatelessWidget {
                     Text(
                       'No Archived Tasks Yet' ,
                       style: TextStyle(
-                        color: Colors.grey ,
+                        color: AppCubit.get(context).isDark ?Colors.white :Colors.black,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold ,
                       ),

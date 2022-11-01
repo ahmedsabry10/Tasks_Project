@@ -65,17 +65,17 @@ class MyApp extends StatelessWidget {
 
             darkTheme: ThemeData(
               //#243447
-                scaffoldBackgroundColor: HexColor('#243447'),
+                scaffoldBackgroundColor: HexColor('#34495E'),
                 primarySwatch: Colors.blue,
-                backgroundColor: HexColor('#243447'),
+                backgroundColor: HexColor('#34495E'),
                 appBarTheme: AppBarTheme(
-                  backgroundColor:  HexColor('#243447'),
+                  backgroundColor:  HexColor('#34495E'),
                   titleSpacing: 20.0,
                   backwardsCompatibility: false,
                   elevation: 0.0,
                   systemOverlayStyle: SystemUiOverlayStyle(
                     statusBarIconBrightness: Brightness.light,
-                    statusBarColor: HexColor('#243447'),
+                    statusBarColor: HexColor('#34495E'),
                   ),
                   titleTextStyle: TextStyle(
                     color: Colors.white,
@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
                   type: BottomNavigationBarType.fixed,
                   selectedItemColor: Colors.blue,
                   unselectedItemColor: Colors.grey,
-                  backgroundColor: HexColor('#243447'),
+                  backgroundColor: HexColor('#34495E'),
                 ),
                 textTheme: TextTheme(
                     bodyText1: TextStyle(

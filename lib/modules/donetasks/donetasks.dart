@@ -35,7 +35,7 @@ class DoneTask extends StatelessWidget {
                   Icon(
                     Icons.check_circle_rounded,
                     size: 100.0,
-                    color: Colors.grey,
+                    color: AppCubit.get(context).isDark ?Colors.white :Colors.black,
                   ) ,
                   SizedBox(
                     height: 20.0,
@@ -43,7 +43,7 @@ class DoneTask extends StatelessWidget {
                   Text(
                     'No Done Tasks Yet' ,
                     style: TextStyle(
-                      color: Colors.grey ,
+                      color: AppCubit.get(context).isDark ?Colors.white :Colors.black,
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold ,
                     ),

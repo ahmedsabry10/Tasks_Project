@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tests/shared/cubit/cubit.dart';
 
+
+var scaffoldKey= GlobalKey<ScaffoldState>();
 void navigateTo (context ,widget)=>Navigator.push(
   context,
   MaterialPageRoute(
@@ -14,103 +16,125 @@ Widget buildNewTaskItem (Map model , context) =>  Dismissible(
     padding: const EdgeInsets.all(15.0),
     child: Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      color:Colors.grey[50],
+      color:AppCubit.get(context).isDark ? HexColor('#2E4053'): Colors.grey[50],
       elevation: 7.0,
       margin: const EdgeInsets.symmetric(
         horizontal: 2.0,
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 10.0,
-            ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
 
-            Card(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              color: Colors.grey[50],
-              elevation: 7.0,
-              margin: const EdgeInsets.symmetric(
-                horizontal: 2.0,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
+
+          children: [
+            //date and title
+            Row(
+              children: [
+
+
+                //title
+                Expanded(
                   child: Text(
-                    '${model['time']}',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        color: Colors.black
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 20.0,
-            ),
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
                     '${model['title']}',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 15.0,
-                      color:Colors.black,
+                      fontSize: 20.0,
+                      color:Colors.blue,
 
                     ),
                   ),
-                  Text(
-                    '${model['date']}',
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(
-                        color: Colors.black,
+                ) ,
 
-                        fontSize: 12.0
-                    ),
+
+                SizedBox(
+                  width: 20.0,
+                ),
+
+                //date
+                Text(
+                  '${model['date']}',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(
+                      color: AppCubit.get(context).isDark ? Colors.white: Colors.black,
+
+                      fontSize: 15.0
                   ),
-                ],
-              ),
-            ) ,
+                ),
 
 
-            SizedBox(
-              width: 20.0,
+
+              ],
+
             ),
 
-            IconButton(
-
-                onPressed:(){
-                  AppCubit.get(context).updateDatabase(status: 'done', id:model['id']);
-                },
-                icon: Icon(
-                  Icons.check_circle_rounded ,
-                  color: Colors.black,
-                  size: 20.0,
-
-                )),
-            IconButton(
-                onPressed:(){
-                   AppCubit.get(context).updateDatabase(status: 'archived', id:model['id']);
-                },
-                icon: Icon(
-                  Icons.archive_rounded ,
-                  color: Colors.black,
-                  size: 20.0,
-                )),
+            //details
 
 
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: double.infinity,
+                child: Card(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  color:AppCubit.get(context).isDark ? HexColor('#283747'):Colors.grey[300],
+                  elevation: 7.0,
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 2.0,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      '${model['details']}',
+                      style: TextStyle(
+                          color: AppCubit.get(context).isDark ? Colors.white: Colors.black,
+                          fontSize: 15.0
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            //icons and time
+            Row(
+              children: [
+                Text(
+                  '${model['time']}',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    color: AppCubit.get(context).isDark ? Colors.white: Colors.black,
+                  ),
+                ),
+                Spacer(),
+
+                IconButton(
+
+                    onPressed:(){
+                      AppCubit.get(context).updateDatabase(status: 'done', id:model['id']);
+                    },
+                    icon: Icon(
+                      Icons.check_circle_rounded ,
+                      color: AppCubit.get(context).isDark ? Colors.white: Colors.black,
+                      size: 20.0,
+
+                    )),
+                IconButton(
+                    onPressed:(){
+                      AppCubit.get(context).updateDatabase(status: 'archived', id:model['id']);
+                    },
+                    icon: Icon(
+                      Icons.archive_rounded ,
+                      color: AppCubit.get(context).isDark ? Colors.white: Colors.black,
+                      size: 20.0,
+                    )),
+              ],
+            )
           ],
-
         ),
       ),
     ),
@@ -126,7 +150,7 @@ Widget buildDoneTaskItem (Map model , context) =>   Dismissible(
     padding: const EdgeInsets.all(15.0),
     child: Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      color: Colors.grey[50],
+      color:AppCubit.get(context).isDark ? HexColor('#2E4053'): Colors.grey[50],
       elevation: 7.0,
       margin: const EdgeInsets.symmetric(
         horizontal: 2.0,
@@ -178,16 +202,19 @@ Widget buildDoneTaskItem (Map model , context) =>   Dismissible(
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15.0,
-                      color:Colors.black,
+                      color:Colors.blue,
 
                     ),
+                  ),
+                  SizedBox(
+                    height: 1.0,
                   ),
                   Text(
                     '${model['date']}',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
-                        color: Colors.black,
+                        color: AppCubit.get(context).isDark ? Colors.white: Colors.black,
 
                         fontSize: 12.0
                     ),
@@ -209,7 +236,7 @@ Widget buildDoneTaskItem (Map model , context) =>   Dismissible(
                 },
                 icon: Icon(
                   Icons.info_rounded ,
-                  color: Colors.black,
+                  color: AppCubit.get(context).isDark ? Colors.white: Colors.black,
                 )),
 
             IconButton(
@@ -218,7 +245,7 @@ Widget buildDoneTaskItem (Map model , context) =>   Dismissible(
                 },
                 icon: Icon(
                   Icons.archive ,
-                  color: Colors.black,
+                  color: AppCubit.get(context).isDark ? Colors.white: Colors.black,
                 )),
 
 
@@ -239,7 +266,7 @@ Widget buildArchivedTaskItem (Map model , context) =>   Dismissible(
     padding: const EdgeInsets.all(15.0),
     child: Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      color: Colors.grey[50],
+      color:AppCubit.get(context).isDark ? HexColor('#2E4053'): Colors.grey[50],
       elevation: 7.0,
       margin: const EdgeInsets.symmetric(
         horizontal: 2.0,
@@ -290,16 +317,19 @@ Widget buildArchivedTaskItem (Map model , context) =>   Dismissible(
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15.0,
-                      color:Colors.black,
+                      color:Colors.blue,
 
                     ),
+                  ),
+                  SizedBox(
+                    height: 1.0,
                   ),
                   Text(
                     '${model['date']}',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
-                        color: Colors.black,
+                        color: AppCubit.get(context).isDark ? Colors.white: Colors.black,
 
                         fontSize: 12.0
                     ),
@@ -320,7 +350,7 @@ Widget buildArchivedTaskItem (Map model , context) =>   Dismissible(
                 },
                 icon: Icon(
                   Icons.unarchive ,
-                  color: Colors.black,
+                  color: AppCubit.get(context).isDark ? Colors.white: Colors.black,
                 )),
 
           ],
