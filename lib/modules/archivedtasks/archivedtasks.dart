@@ -34,10 +34,8 @@ class ArchivedTask extends StatelessWidget {
               builder:(context)=> ListView.separated(
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (context,index)=>buildArchivedTaskItem(tasks[index] , context),
-                separatorBuilder: (context,index)=>Container(
-                  width: double.infinity,
-                  height: .5,
-                  color: Colors.grey[300],
+                separatorBuilder: (context,index)=>SizedBox(
+                  height: 0.00001,
                 ),
                 itemCount: tasks.length,
               ),

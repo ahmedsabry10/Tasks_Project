@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:tests/modules/donetasks/donetasks.dart';
-import 'package:tests/modules/newtasks/newtasks.dart';
 import 'package:tests/shared/cubit/cubit.dart';
 
 void navigateTo (context ,widget)=>Navigator.push(
@@ -10,20 +8,13 @@ void navigateTo (context ,widget)=>Navigator.push(
   MaterialPageRoute(
       builder: (context)=>widget),);
 
-class Components extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 Widget buildNewTaskItem (Map model , context) =>  Dismissible(
   key: Key(model['id'].toString()),
   child:   Padding(
     padding: const EdgeInsets.all(15.0),
     child: Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      color: Colors.grey[50],
+      color:Colors.grey[50],
       elevation: 7.0,
       margin: const EdgeInsets.symmetric(
         horizontal: 2.0,
@@ -32,48 +23,27 @@ Widget buildNewTaskItem (Map model , context) =>  Dismissible(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-
           children: [
-            /*
-                CircleAvatar(
-                  radius: 35.0,
-                  child: Text(
-                    //'${model['time']}',
-                    '6:10 PM',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-
-
-
-
-                 */
-
             SizedBox(
               width: 10.0,
             ),
 
-            Container(
-              height: 50.0,
-              child: Card(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                elevation: 3.0,
-
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 2.0,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(
-                      '${model['time']}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                          color: Colors.grey
-                      ),
+            Card(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              color: Colors.grey[50],
+              elevation: 7.0,
+              margin: const EdgeInsets.symmetric(
+                horizontal: 2.0,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    '${model['time']}',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: Colors.black
                     ),
                   ),
                 ),
@@ -94,13 +64,18 @@ Widget buildNewTaskItem (Map model , context) =>  Dismissible(
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15.0,
+                      color:Colors.black,
+
                     ),
                   ),
                   Text(
                     '${model['date']}',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: TextStyle(
-                      color: Colors.black ,
-                      fontSize: 12.0
+                        color: Colors.black,
+
+                        fontSize: 12.0
                     ),
                   ),
                 ],
@@ -119,7 +94,9 @@ Widget buildNewTaskItem (Map model , context) =>  Dismissible(
                 },
                 icon: Icon(
                   Icons.check_circle_rounded ,
-                  color: Colors.grey,
+                  color: Colors.black,
+                  size: 20.0,
+
                 )),
             IconButton(
                 onPressed:(){
@@ -127,7 +104,8 @@ Widget buildNewTaskItem (Map model , context) =>  Dismissible(
                 },
                 icon: Icon(
                   Icons.archive_rounded ,
-                  color: Colors.grey,
+                  color: Colors.black,
+                  size: 20.0,
                 )),
 
 
@@ -159,46 +137,27 @@ Widget buildDoneTaskItem (Map model , context) =>   Dismissible(
           mainAxisAlignment: MainAxisAlignment.start,
 
           children: [
-            /*
-                CircleAvatar(
-                  radius: 35.0,
-                  child: Text(
-                    //'${model['time']}',
-                    '6:10 PM',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-
-
-
-
-                 */
 
             SizedBox(
               width: 10.0,
             ),
 
-            Container(
-              height: 50.0,
-              child: Card(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                elevation: 3.0,
-
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 2.0,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(
-                      '${model['time']}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                          color: Colors.grey
-                      ),
+            Card(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              color: Colors.grey[50],
+              elevation: 7.0,
+              margin: const EdgeInsets.symmetric(
+                horizontal: 2.0,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    '${model['time']}',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: Colors.black
                     ),
                   ),
                 ),
@@ -219,12 +178,17 @@ Widget buildDoneTaskItem (Map model , context) =>   Dismissible(
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15.0,
+                      color:Colors.black,
+
                     ),
                   ),
                   Text(
                     '${model['date']}',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: TextStyle(
-                        color: Colors.black ,
+                        color: Colors.black,
+
                         fontSize: 12.0
                     ),
                   ),
@@ -245,7 +209,7 @@ Widget buildDoneTaskItem (Map model , context) =>   Dismissible(
                 },
                 icon: Icon(
                   Icons.info_rounded ,
-                  color: Colors.grey,
+                  color: Colors.black,
                 )),
 
             IconButton(
@@ -254,7 +218,7 @@ Widget buildDoneTaskItem (Map model , context) =>   Dismissible(
                 },
                 icon: Icon(
                   Icons.archive ,
-                  color: Colors.grey,
+                  color: Colors.black,
                 )),
 
 
@@ -286,46 +250,26 @@ Widget buildArchivedTaskItem (Map model , context) =>   Dismissible(
           mainAxisAlignment: MainAxisAlignment.start,
 
           children: [
-            /*
-                CircleAvatar(
-                  radius: 35.0,
-                  child: Text(
-                    //'${model['time']}',
-                    '6:10 PM',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-
-
-
-
-                 */
-
             SizedBox(
               width: 10.0,
             ),
 
-            Container(
-              height: 50.0,
-              child: Card(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                elevation: 3.0,
-
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 2.0,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(
-                      '${model['time']}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                          color: Colors.grey
-                      ),
+            Card(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              color: Colors.grey[50],
+              elevation: 7.0,
+              margin: const EdgeInsets.symmetric(
+                horizontal: 2.0,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    '${model['time']}',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: Colors.black
                     ),
                   ),
                 ),
@@ -346,12 +290,17 @@ Widget buildArchivedTaskItem (Map model , context) =>   Dismissible(
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15.0,
+                      color:Colors.black,
+
                     ),
                   ),
                   Text(
                     '${model['date']}',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: TextStyle(
-                        color: Colors.black ,
+                        color: Colors.black,
+
                         fontSize: 12.0
                     ),
                   ),
@@ -371,7 +320,7 @@ Widget buildArchivedTaskItem (Map model , context) =>   Dismissible(
                 },
                 icon: Icon(
                   Icons.unarchive ,
-                  color: Colors.grey,
+                  color: Colors.black,
                 )),
 
           ],

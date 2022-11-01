@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
+import 'package:tests/add_new_task_screen.dart';
 import 'package:tests/shared/cubit/cubit.dart';
 import 'package:tests/shared/cubit/states.dart';
 
@@ -10,11 +11,9 @@ import 'components/components.dart';
 import 'modules/archivedtasks/archivedtasks.dart';
 
 class HomeLayout extends StatelessWidget {
-
   var titleController = TextEditingController();
   var timeController = TextEditingController();
   var dateController = TextEditingController();
-
 
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var formKey = GlobalKey<FormState>();
@@ -23,7 +22,7 @@ class HomeLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (BuildContext context, AppStates states) {
-        if(states is AppInsertDatabaseState){
+        if (states is AppInsertDatabaseState) {
           Navigator.pop(context);
         }
       },
@@ -32,17 +31,23 @@ class HomeLayout extends StatelessWidget {
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
+            leading: IconButton(
+                onPressed: () {
+                  navigateTo(context, ArchivedTask());
+                },
+                icon: Icon(
+                  Icons.archive,
+                  color: AppCubit.get(context).isDark ?Colors.white :Colors.black,
+                )),
 
             actions: [
               IconButton(
-                  onPressed:(){
-                    navigateTo(context , ArchivedTask());
+                  onPressed: (){
+                    AppCubit.get(context).changeAppMode();
                   },
-                  icon: Icon(
-                    Icons.archive ,
-                    color: Colors.blue,
+                  icon: const Icon(
+                    Icons.brightness_4_outlined,
                   )),
-
             ],
           ),
           body: ConditionalBuilder(
@@ -52,138 +57,12 @@ class HomeLayout extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              if (cubit.isBottomSheetShown) {
-                if (formKey.currentState.validate()) {
-                  cubit.insertToDatabase(
-                      title: titleController.text,
-                      time: timeController.text,
-                      date: dateController.text,
-                  );
-                }
-              }
-              else {
-                scaffoldKey.currentState.showBottomSheet((context) =>
-                    Container(
-                      padding: EdgeInsets.all(20.0),
-                      color:Colors.grey[300],
-                      child: Form(
-                        key: formKey,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            TextFormField(
-                              controller: titleController,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[300],
-                                labelText: 'Task Title',
-                                labelStyle: TextStyle(
-                                  color: HexColor('#424949')
-                                ),
-                                prefixIcon: Icon(
-                                  Icons.title,
-                                    color: HexColor('#424949')
-                                ),
-                              ),
-                              validator: (String value) {
-                                if (value.isEmpty) {
-                                  return 'Should enter title';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(
-                              height: 15.0,
-                            ),
-                            TextFormField(
-                              controller: timeController,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[300],
-                                labelText: 'Task time',
-                                labelStyle: TextStyle(
-                                    color: HexColor('#424949')
-                                ),
-                                prefixIcon: Icon(
-                                  Icons.watch_later_outlined,
-                                    color: HexColor('#424949')
-                                ),
-                              ),
-                              validator: (String value) {
-                                if (value.isEmpty) {
-                                  return 'Should enter title';
-                                }
-                                return null;
-                              },
-                              onTap: () {
-                                showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay.now(),
-                                ).then((value) {
-                                  timeController.text =
-                                      value.format(context).toString();
-                                  print(value.format(context));
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              height: 15.0,
-                            ),
-                            TextFormField(
-                              controller: dateController,
-                              validator: (String value) {
-                                if (value.isEmpty) {
-                                  return 'Should enter date';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[300],
-                                labelText: 'Task Date',
-                                labelStyle: TextStyle(
-                                    color: HexColor('#424949')
-                                ),
-                                prefixIcon: Icon(
-                                  Icons.calendar_today,
-                                    color: HexColor('#424949')
-                                ),
-                              ),
-                              onTap: () {
-                                showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime.now(),
-                                    lastDate: DateTime.parse('2100-10-10'))
-                                    .then((value) {
-                                  dateController.text =
-                                      DateFormat.yMMMd().format(value);
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  elevation: 10.0,
-                ).closed.then((value){
-                  cubit.changeBottomSheetState(
-                    isShow: false,
-                    icon: Icons.edit ,);
-                });
-                cubit.changeBottomSheetState(
-                  isShow: true,
-                  icon: Icons.add ,);
-              }
+              navigateTo(context, AddNewTasks());
             },
             child: Icon(
               cubit.fabIcon,
             ),
           ),
-
-
-
-
           bottomNavigationBar: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
@@ -198,7 +77,6 @@ class HomeLayout extends StatelessWidget {
                 ),
                 label: 'Done',
               ),
-
             ],
             type: BottomNavigationBarType.fixed,
             currentIndex: cubit.currentIndex,

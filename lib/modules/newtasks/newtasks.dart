@@ -26,7 +26,7 @@ class NewTask extends StatelessWidget {
           itemBuilder: (context,index)=>buildNewTaskItem(tasks[index] , context),
 
           separatorBuilder: (context,index)=>SizedBox(
-            height: 1,
+            height: 0.00001,
           ),
           itemCount: tasks.length,
         ),
