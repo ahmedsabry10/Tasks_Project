@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tests/Data/Style/icon_broken.dart';
 import 'package:tests/Data/components/components.dart';
+import 'package:tests/Data/shared/cachehelper.dart';
 import 'package:tests/Data/shared/cubit/AppCubit/cubit.dart';
 import 'package:tests/Screens/Auth_Screen/login_screen.dart';
 import 'package:tests/Screens/Drawer_Screens/drawerScreens/profile_screen.dart';
@@ -85,7 +86,11 @@ class NavigationDrawerWidget extends StatelessWidget {
                     buildMenuItem(
                       text: 'Log out',
                       icon: IconBroken.Logout,
-                      onClicked: () => navigateAndFinish(context, LoginScreen()),
+                      onClicked: (){
+                        CacheHelper.removeData(key: 'uId').then((value){
+                          navigateAndFinish(context, LoginScreen());
+                        });
+                      },
                     ),
 
 

@@ -3,25 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:tests/Data/constanse/constanse.dart';
 import 'package:tests/Data/shared/cachehelper.dart';
 import 'package:tests/Data/shared/cubit/AppCubit/cubit.dart';
 import 'package:tests/Data/shared/cubit/AppCubit/states.dart';
 import 'package:tests/Data/shared/shared.dart';
 import 'package:tests/Screens/Auth_Screen/login_screen.dart';
+import 'package:tests/Screens/MainScreens/home_layout.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await CacheHelper.init();
+  Widget widget;
   bool isDark=CacheHelper.getBoolean(key:'isDark');
-  runApp( MyApp(isDark));
+  uId = CacheHelper.getData(key: 'uId');
+  if(uId != null)
+  {
+    widget = HomeLayout();
+  } else
+  {
+    widget = LoginScreen();
+  }
+  runApp(MyApp(
+    isDark: isDark,
+    startWidget: widget,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   final bool isDark;
-  MyApp(this.isDark);
+  final Widget startWidget;
+
+  MyApp({
+    this.isDark,
+    this.startWidget,
+  });
   @override
   Widget build(BuildContext context) {
     Bloc.observer = MyBlocObserver();
@@ -111,7 +130,7 @@ class MyApp extends StatelessWidget {
 
             themeMode:AppCubit.get(context).isDark?ThemeMode.dark:ThemeMode.light,
 
-            home: LoginScreen(),
+            home: startWidget,
             debugShowCheckedModeBanner: false,
           );
         },
