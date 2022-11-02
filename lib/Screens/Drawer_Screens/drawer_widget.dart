@@ -66,7 +66,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                     const SizedBox(height: 16),
                     buildMenuItem(
                       text: 'Archived',
-                      icon: Icons.archive,
+                      icon: Icons.archive_outlined,
                       onClicked: () => selectedItem(context, 1),
                     ),
                     const SizedBox(height: 16),
