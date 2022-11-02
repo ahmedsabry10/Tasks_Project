@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:tests/Data/shared/cubit/cubit.dart';
+import 'package:tests/Data/shared/cubit/AppCubit/cubit.dart';
 
 
 void showToast({

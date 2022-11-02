@@ -1,11 +1,12 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tests/Data/Style/icon_broken.dart';
 import 'package:tests/Data/components/components.dart';
-import 'package:tests/Data/shared/cubit/cubit.dart';
-import 'package:tests/Data/shared/cubit/states.dart';
+import 'package:tests/Data/shared/cubit/AppCubit/cubit.dart';
+import 'package:tests/Data/shared/cubit/AppCubit/states.dart';
 
-import 'package:tests/Screens/add_new_task_screen.dart';
+import 'package:tests/Screens/MainScreens/add_new_task_screen.dart';
 import 'package:tests/Screens/modules/archivedtasks/archivedtasks.dart';
 
 
@@ -33,7 +34,7 @@ class HomeLayout extends StatelessWidget {
                   navigateTo(context, ArchivedTask());
                 },
                 icon: Icon(
-                  Icons.archive,
+                  Icons.archive_outlined,
                   color: AppCubit.get(context).isDark ?Colors.white :Colors.black,
                 )),
 
@@ -64,13 +65,13 @@ class HomeLayout extends StatelessWidget {
             items: [
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.menu_rounded,
+                  IconBroken.Paper,
                 ),
-                label: 'tasks',
+                label: 'Tasks',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.check_circle_rounded,
+                  IconBroken.Tick_Square,
                 ),
                 label: 'Done',
               ),

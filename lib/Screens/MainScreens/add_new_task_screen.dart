@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:tests/Data/shared/cubit/cubit.dart';
-import 'package:tests/Data/shared/cubit/states.dart';
+import 'package:tests/Data/shared/cubit/AppCubit/cubit.dart';
+import 'package:tests/Data/shared/cubit/AppCubit/states.dart';
 
 class AddNewTasks extends StatelessWidget {
   AddNewTasks({Key key}) : super(key: key);

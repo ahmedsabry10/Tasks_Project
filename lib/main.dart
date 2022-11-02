@@ -4,13 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tests/Data/shared/cachehelper.dart';
-import 'package:tests/Data/shared/cubit/cubit.dart';
-import 'package:tests/Data/shared/cubit/states.dart';
+import 'package:tests/Data/shared/cubit/AppCubit/cubit.dart';
+import 'package:tests/Data/shared/cubit/AppCubit/states.dart';
 import 'package:tests/Data/shared/shared.dart';
 import 'package:tests/Screens/Auth_Screen/login_screen.dart';
-import 'package:tests/Screens/home_layout.dart';
 
-import 'Screens/add_new_task_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -96,7 +94,7 @@ class MyApp extends StatelessWidget {
                 bottomNavigationBarTheme: BottomNavigationBarThemeData(
                   type: BottomNavigationBarType.fixed,
                   selectedItemColor: Colors.blue,
-                  unselectedItemColor: Colors.grey,
+                  unselectedItemColor: Colors.white,
                   backgroundColor: HexColor('#34495E'),
                 ),
                 textTheme: TextTheme(
