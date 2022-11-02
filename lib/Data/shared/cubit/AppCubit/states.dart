@@ -11,3 +11,19 @@ class AppDeleteDatabaseState extends AppStates{}
 
 class AppChangeBottomSheetState extends AppStates{}
 class AppChangeModeStates extends AppStates{}
+
+
+class UserUpdateLoadingState extends AppStates {}
+class UserUpdateErrorState extends AppStates {}
+
+
+class GetUserLoadingState extends AppStates {}
+
+class GetUserSuccessState extends AppStates {}
+
+class GetUserErrorState extends AppStates
+{
+  final String error;
+
+  GetUserErrorState(this.error);
+}

@@ -421,3 +421,55 @@ Widget defaultLine() => Container(
   height: 1.0,
   color: Colors.grey[300],
 );
+
+Widget defaultFormFiled({
+  @required TextEditingController controller,
+  @required TextInputType type,
+  Function onSubmit,
+  Function onChange,
+  Function onTap,
+  bool isPassword = false,
+  Function validate,
+  @required String label,
+  @required IconData prefix,
+  IconData suffix,
+  Function suffixPressed,
+  bool isClickable = true,
+  Color textColor = Colors.black,
+}) =>
+    TextFormField(
+      controller: controller,
+      style: TextStyle(
+        color: textColor,
+      ),
+      keyboardType: type,
+      obscureText: isPassword,
+      onFieldSubmitted: (s) {
+        onSubmit(s);
+      },
+      onChanged: (s) {
+        onChange(s);
+      },
+      onTap: () {
+        onTap();
+      },
+      validator: (s) {
+        validate(s);
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(
+          prefix,
+        ),
+        suffixIcon: suffix != null
+            ? IconButton(
+          onPressed: () {
+            suffixPressed();
+          },
+          icon: Icon(suffix),
+        )
+            : null,
+        border: const OutlineInputBorder(),
+      ),
+    );

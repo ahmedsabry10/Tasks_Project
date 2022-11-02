@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Bloc.observer = MyBlocObserver();
     return BlocProvider(
-      create: (BuildContext context) => AppCubit()..createDataBase()..changeAppMode(
+      create: (BuildContext context) => AppCubit()..getUserData()..createDataBase()..changeAppMode(
         fromShared: isDark,
       ),
       child: BlocConsumer <AppCubit ,AppStates>(

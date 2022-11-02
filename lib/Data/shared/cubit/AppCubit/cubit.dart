@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:tests/Data/Models/user_model.dart';
+import 'package:tests/Data/constanse/constanse.dart';
 import 'package:tests/Data/shared/cubit/AppCubit/states.dart';
 import 'package:tests/Screens/modules/donetasks/donetasks.dart';
 import 'package:tests/Screens/modules/newtasks/newtasks.dart';
@@ -31,6 +34,59 @@ class AppCubit extends Cubit <AppStates>{
   List <Map> doneTasks =[];
   List <Map> archivedTasks =[];
 
+
+  UserModel userModel ;
+
+
+  //get user
+  void getUserData() {
+    emit(GetUserLoadingState());
+    FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
+      userModel = UserModel.fromJson(value.data());
+
+      print(value.data());
+      emit(GetUserSuccessState());
+    }).catchError((error) {
+      emit(GetUserErrorState(error.toString()));
+      print(error.toString());
+    });
+  }
+
+  // update users
+  void updateUser({
+    @required String name,
+    @required String phone,
+    @required String bio,
+    String cover,
+    String image,
+  }) {
+    emit(UserUpdateLoadingState());
+    UserModel socialUserModel = UserModel(
+      uId: uId,
+      email: userModel.email ?? 'your mail',
+      image: image ??
+          userModel.image ??
+          'https://img.freepik.com/premium-photo/3d-rendering-3d-illustration-people-avatar-icon-isolated-white-background_640106-552.jpg?size=626&ext=jpg&uid=R78364619&ga=GA1.2.140343669.1662316312',
+      cover: cover ??
+          userModel.cover ??
+          'https://img.freepik.com/free-photo/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-82801.jpg?size=626&ext=jpg&uid=R78364619&ga=GA1.2.140343669.1662316312',
+      name: name ?? 'Name',
+      phone: phone ?? 'Number Phone',
+      bio: bio ?? 'your bio',
+      isEmailVerified: false,
+    );
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .update(socialUserModel.toMap())
+        .then((value) {
+      getUserData();
+    }).catchError((error) {
+      print(error.toString());
+      emit(UserUpdateErrorState());
+    });
+  }
 
 
 // داله ال create

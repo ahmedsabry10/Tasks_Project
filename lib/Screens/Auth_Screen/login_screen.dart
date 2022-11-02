@@ -54,6 +54,7 @@ class LoginScreen extends StatelessWidget {
                 context,
                 HomeLayout(),
               );
+              AppCubit.get(context).getUserData();
 
             });
           }
@@ -80,7 +81,6 @@ class LoginScreen extends StatelessWidget {
                                   'assets/splach.webp'
                                 )
                             ),
-
 
 
                             borderRadius: BorderRadius.circular(10.0),
