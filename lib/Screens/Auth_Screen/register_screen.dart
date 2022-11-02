@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tests/Data/Style/icon_broken.dart';
 import 'package:tests/Data/components/components.dart';
+import 'package:tests/Data/shared/cubit/AppCubit/cubit.dart';
 import 'package:tests/Data/shared/cubit/RegisterCubit/register_cubit.dart';
 import 'package:tests/Data/shared/cubit/RegisterCubit/register_states.dart';
 import 'package:tests/Screens/Auth_Screen/login_screen.dart';
@@ -48,12 +49,12 @@ class RegisterScreen extends StatelessWidget {
                       children: [
 
                         Container(
-                          height: 200.0,
+                          height: 120.0,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             image: const DecorationImage(
-                                image: NetworkImage(
-                                    'https://media.istockphoto.com/vectors/letter-s-and-puddle-water-logo-template-design-vector-emblem-design-vector-id1329175476?k=20&m=1329175476&s=170667a&w=0&h=35yLGDKif6pjZ6o3mMziApSh9ebIT1nT-7QCESG7FM4='
+                                image: AssetImage(
+                                    'assets/splach.webp'
                                 )
                             ),
 
@@ -62,6 +63,7 @@ class RegisterScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
+
 
                         const SizedBox(
                           height: 20.0,
@@ -72,6 +74,9 @@ class RegisterScreen extends StatelessWidget {
 
                         //name
                         TextFormField(
+                          style: TextStyle(
+                            color:AppCubit.get(context).isDark? Colors.white:Colors.black,
+                          ),
                           controller: nameController,
                           keyboardType: TextInputType.name,
                           enabled: true,
@@ -87,7 +92,8 @@ class RegisterScreen extends StatelessWidget {
                             contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
                             labelText: 'User Name',
                             labelStyle: const TextStyle(
-                                fontStyle: FontStyle.italic
+                                fontStyle: FontStyle.italic,
+                              color: Colors.blue
                             ),
                             prefixIcon: Icon(
                               IconBroken.Add_User,
@@ -108,8 +114,54 @@ class RegisterScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20.0,
                         ),
+
+                        //email
+                        TextFormField(
+                          style: TextStyle(
+                            color:AppCubit.get(context).isDark? Colors.white:Colors.black,
+                          ),
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          enabled: true,
+
+
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "Please enter your email";
+                            } else
+                              return null;
+                          },
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
+                            labelText: 'Email Address',
+                            labelStyle: const TextStyle(
+                                fontStyle: FontStyle.italic,
+                                color: Colors.blue
+                            ),
+                            prefixIcon: Icon(
+                              IconBroken.Message,
+                              color: Colors.blue,
+
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              borderSide:  BorderSide(
+                                color: Colors.blue,
+
+                                width: .3,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+
                         //phone
                         TextFormField(
+                          style: TextStyle(
+                            color:AppCubit.get(context).isDark? Colors.white:Colors.black,
+                          ),
                           controller: phoneController,
                           keyboardType: TextInputType.phone,
                           enabled: true,
@@ -125,7 +177,8 @@ class RegisterScreen extends StatelessWidget {
                             contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
                             labelText: 'Phone',
                             labelStyle: const TextStyle(
-                                fontStyle: FontStyle.italic
+                                fontStyle: FontStyle.italic,
+                                color: Colors.blue
                             ),
                             prefixIcon: Icon(
                               IconBroken.Call,
@@ -147,47 +200,11 @@ class RegisterScreen extends StatelessWidget {
                           height: 20.0,
                         ),
 
-                        //email
-                        TextFormField(
-                          controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          enabled: true,
-
-
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return "Please enter your email";
-                            } else
-                              return null;
-                          },
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
-                            labelText: 'Email Address',
-                            labelStyle: const TextStyle(
-                                fontStyle: FontStyle.italic
-                            ),
-                            prefixIcon: Icon(
-                              IconBroken.Message,
-                              color: Colors.blue,
-
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide:  BorderSide(
-                                color: Colors.blue,
-
-                                width: .3,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-
                         //password
                         TextFormField(
+                          style: TextStyle(
+                            color:AppCubit.get(context).isDark? Colors.white:Colors.black,
+                          ),
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: RegisterCubit.get(context).isPassword,
@@ -204,7 +221,8 @@ class RegisterScreen extends StatelessWidget {
                             contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
                             labelText: 'Password',
                             labelStyle: const TextStyle(
-                                fontStyle: FontStyle.italic
+                                fontStyle: FontStyle.italic,
+                                color: Colors.blue
                             ),
 
                             prefixIcon: Icon(
@@ -250,14 +268,7 @@ class RegisterScreen extends StatelessWidget {
                           condition: state is ! RegisterLoadingState,
                           builder:(context)=>Container(
                             width: double.infinity,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                10.0,
-                              ),
-                              color: Colors.blue,
-                            ),
-                            child: MaterialButton(
+                            child: ElevatedButton(
                               onPressed: (){
                                 if (formKey.currentState.validate()) {
                                   RegisterCubit.get(context).userRegister(

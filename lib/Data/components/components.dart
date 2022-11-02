@@ -416,3 +416,8 @@ void navigateAndFinish(context ,widget)=>Navigator.pushAndRemoveUntil(
   ),
       (Route <dynamic> route)=>false,
 );
+Widget defaultLine() => Container(
+  width: double.infinity,
+  height: 1.0,
+  color: Colors.grey[300],
+);

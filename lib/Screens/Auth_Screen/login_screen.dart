@@ -7,6 +7,7 @@ import 'package:tests/Data/Style/icon_broken.dart';
 import 'package:tests/Data/components/components.dart';
 import 'package:tests/Data/constanse/constanse.dart';
 import 'package:tests/Data/shared/cachehelper.dart';
+import 'package:tests/Data/shared/cubit/AppCubit/cubit.dart';
 import 'package:tests/Data/shared/cubit/LoginCubit/login_cubit.dart';
 import 'package:tests/Data/shared/cubit/LoginCubit/login_states.dart';
 import 'package:tests/Screens/Auth_Screen/register_screen.dart';
@@ -71,12 +72,12 @@ class LoginScreen extends StatelessWidget {
                       children: [
 
                         Container(
-                          height: 200.0,
+                          height: 120.0,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             image: const DecorationImage(
-                                image: NetworkImage(
-                                    'https://media.istockphoto.com/vectors/letter-s-and-puddle-water-logo-template-design-vector-emblem-design-vector-id1329175476?k=20&m=1329175476&s=170667a&w=0&h=35yLGDKif6pjZ6o3mMziApSh9ebIT1nT-7QCESG7FM4='
+                                image: AssetImage(
+                                  'assets/splach.webp'
                                 )
                             ),
 
@@ -85,6 +86,7 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
+
 
                         const SizedBox(
                           height: 20.0,
@@ -97,6 +99,9 @@ class LoginScreen extends StatelessWidget {
                         //email
 
                         TextFormField(
+                          style: TextStyle(
+                            color:AppCubit.get(context).isDark? Colors.white:Colors.black,
+                          ),
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           enabled: true,
@@ -112,7 +117,9 @@ class LoginScreen extends StatelessWidget {
                             contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
                             labelText: 'Email Address',
                             labelStyle: const TextStyle(
-                                fontStyle: FontStyle.italic
+                                fontStyle: FontStyle.italic,
+                                color: Colors.blue
+
                             ),
                             prefixIcon: Icon(
                               IconBroken.User,
@@ -134,6 +141,9 @@ class LoginScreen extends StatelessWidget {
 
                         //password
                         TextFormField(
+                          style: TextStyle(
+                            color:AppCubit.get(context).isDark? Colors.white:Colors.black,
+                          ),
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: LoginCubit.get(context).isPassword,
@@ -150,7 +160,8 @@ class LoginScreen extends StatelessWidget {
                             contentPadding: const EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0),
                             labelText: 'Password',
                             labelStyle: const TextStyle(
-                                fontStyle: FontStyle.italic
+                                fontStyle: FontStyle.italic,
+                                color: Colors.blue
                             ),
 
                             prefixIcon: Icon(
@@ -171,7 +182,8 @@ class LoginScreen extends StatelessWidget {
                             LoginCubit.get(context).suffix != null?
                             IconButton(
                               icon:Icon(
-                                  LoginCubit.get(context).suffix
+                                  LoginCubit.get(context).suffix,
+                                color: Colors.blue,
                               ) ,
                               onPressed: (){
                                 LoginCubit.get(context).changePasswordVisibility();
