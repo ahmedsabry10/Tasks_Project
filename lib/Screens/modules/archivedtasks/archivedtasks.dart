@@ -2,10 +2,9 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tests/components/components.dart';
-import 'package:tests/home_layout.dart';
-import 'package:tests/shared/cubit/cubit.dart';
-import 'package:tests/shared/cubit/states.dart';
+import 'package:tests/Data/components/components.dart';
+import 'package:tests/Data/shared/cubit/cubit.dart';
+import 'package:tests/Data/shared/cubit/states.dart';
 
 class ArchivedTask extends StatelessWidget {
 
@@ -20,6 +19,7 @@ class ArchivedTask extends StatelessWidget {
           var tasks =AppCubit.get(context).archivedTasks;
           return Scaffold(
             appBar: AppBar(
+              /*
               leading: IconButton(
                   onPressed:(){
                     navigateAndFinish(context , HomeLayout());
@@ -28,6 +28,8 @@ class ArchivedTask extends StatelessWidget {
                     Icons.arrow_back_ios_new ,
                     color: Colors.grey,
                   )),
+
+               */
             ),
             body: ConditionalBuilder(
               condition: tasks.length > 0,

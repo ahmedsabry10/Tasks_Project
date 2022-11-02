@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:tests/modules/donetasks/donetasks.dart';
-import 'package:tests/modules/newtasks/newtasks.dart';
-import 'package:tests/shared/cubit/states.dart';
+import 'package:tests/Data/shared/cubit/states.dart';
+import 'package:tests/Screens/modules/donetasks/donetasks.dart';
+import 'package:tests/Screens/modules/newtasks/newtasks.dart';
+
 
 import '../cachehelper.dart';
 

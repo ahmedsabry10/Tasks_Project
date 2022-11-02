@@ -1,22 +1,20 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:intl/intl.dart';
-import 'package:tests/add_new_task_screen.dart';
-import 'package:tests/shared/cubit/cubit.dart';
-import 'package:tests/shared/cubit/states.dart';
+import 'package:tests/Data/components/components.dart';
+import 'package:tests/Data/shared/cubit/cubit.dart';
+import 'package:tests/Data/shared/cubit/states.dart';
 
-import 'components/components.dart';
-import 'modules/archivedtasks/archivedtasks.dart';
+import 'package:tests/Screens/add_new_task_screen.dart';
+import 'package:tests/Screens/modules/archivedtasks/archivedtasks.dart';
+
+
 
 class HomeLayout extends StatelessWidget {
   var titleController = TextEditingController();
   var timeController = TextEditingController();
   var dateController = TextEditingController();
 
-  var scaffoldKey = GlobalKey<ScaffoldState>();
-  var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,6 @@ class HomeLayout extends StatelessWidget {
       builder: (BuildContext context, AppStates states) {
         AppCubit cubit = AppCubit.get(context);
         return Scaffold(
-          key: scaffoldKey,
           appBar: AppBar(
             leading: IconButton(
                 onPressed: () {

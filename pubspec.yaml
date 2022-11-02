@@ -37,6 +37,13 @@ dependencies:
   flutter_alarm_clock: ^0.0.2
   shared_preferences: ^2.0.5
   hexcolor: ^2.0.3
+  fluttertoast: ^8.0.9
+
+  #firebase
+  firebase_core: ^1.22.0
+  firebase_auth: ^3.9.0
+  cloud_firestore: ^3.4.8
+  firebase_storage: ^10.3.8
 
 dev_dependencies:
 
@@ -59,6 +66,14 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family: Jannah
+      fonts:
+        - asset: assets/fonts/jannah.ttf
+          weight: 700
+    - family: IconBroken
+      fonts:
+        - asset: assets/fonts/icons.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

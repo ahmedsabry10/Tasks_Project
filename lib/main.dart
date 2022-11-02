@@ -1,17 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:tests/home_layout.dart';
-import 'package:tests/shared/cachehelper.dart';
-import 'package:tests/shared/cubit/cubit.dart';
-import 'package:tests/shared/cubit/states.dart';
-import 'package:tests/shared/shared.dart';
+import 'package:tests/Data/shared/cachehelper.dart';
+import 'package:tests/Data/shared/cubit/cubit.dart';
+import 'package:tests/Data/shared/cubit/states.dart';
+import 'package:tests/Data/shared/shared.dart';
+import 'package:tests/Screens/Auth_Screen/login_screen.dart';
+import 'package:tests/Screens/home_layout.dart';
 
-import 'add_new_task_screen.dart';
+import 'Screens/add_new_task_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await CacheHelper.init();
   bool isDark=CacheHelper.getBoolean(key:'isDark');
   runApp( MyApp(isDark));
@@ -61,7 +64,11 @@ class MyApp extends StatelessWidget {
                   fontSize: 18.0,
                   fontWeight: FontWeight.w600,
                   color: Colors.black,
-                ))),
+                )
+                ),
+                fontFamily: 'Jannah'
+
+            ),
 
             darkTheme: ThemeData(
               //#243447
@@ -99,11 +106,14 @@ class MyApp extends StatelessWidget {
                       fontWeight: FontWeight.w600,
 
                     )
-                )
+                ),
+                fontFamily: 'Jannah'
+
             ),
+
             themeMode:AppCubit.get(context).isDark?ThemeMode.dark:ThemeMode.light,
 
-            home: HomeLayout(),
+            home: LoginScreen(),
             debugShowCheckedModeBanner: false,
           );
         },
