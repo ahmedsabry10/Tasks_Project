@@ -60,7 +60,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 70),
                     buildMenuItem(
-                      text: 'Update Profile',
+                      text: 'Profile',
                       icon: IconBroken.User,
                       onClicked: () => selectedItem(context, 0),
                     ),
@@ -72,7 +72,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     buildMenuItem(
-                      text: 'Dark Mode',
+                      text: AppCubit.get(context).isDark ? 'Light Mode' :'Dark Mode',
                       icon:Icons.brightness_4_outlined,
                       onClicked: () => selectedItem(context, 2),
                     ),
